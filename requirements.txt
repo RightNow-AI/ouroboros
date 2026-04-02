@@ -1,0 +1,14 @@
+torch>=2.4
+transformers>=4.40
+accelerate>=0.30
+deepspeed>=0.14
+einops>=0.8
+rich>=13.0
+wandb>=0.16
+datasets>=2.18
+pyyaml>=6.0
+safetensors>=0.4
+scipy>=1.11
+sentencepiece>=0.2
+trl>=0.8
+pytest>=7.0

@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Checkpoints and model weights (large files)
+checkpoints/
+checkpoints_*/
+ouroboros-600m/
+ouroboros-qwen05/
+*.pt
+*.bin
+*.safetensors
+
+# Logs
+logs/
+server_logs/
+*.log
+
+# Paper (separate submission)
+paper/
+
+# Data
+data/
+*.tar.gz
+
+# System
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.secret
+
+# Claude internal
+CLAUDE.md
+.claude/
+
+# Results files with cost info
+ALL_RESULTS.md
+RESULTS.md
+
+# Pytest
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Build artifacts
+*.egg-info/
+ouroboros.egg-info/
+
+# Generated output
+results_visualization.json

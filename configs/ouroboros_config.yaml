@@ -1,0 +1,79 @@
+# Ouroboros Configuration — Llama-3.2-3B based (~555M params)
+
+vocab_size: 128256
+base_model: "meta-llama/Llama-3.2-3B"
+n_base_layers: 28
+
+core_block:
+  d_model: 3072
+  n_heads: 24
+  n_kv_heads: 8
+  d_ff: 8192
+  head_dim: 128
+  rms_norm_eps: 1.0e-5
+  rope_theta: 500000.0
+  max_seq_len: 2048
+  dropout: 0.0
+
+lora:
+  rank: 16
+  alpha: 32.0
+
+controller:
+  state_proj_dim: 512
+  step_embed_dim: 256
+  halt_proj_dim: 32
+  style_dim: 64
+  style_hidden_dim: 1024
+  n_basis: 8
+  max_steps: 128
+  bottleneck_divisor: 48
+
+halter:
+  hidden_dim: 256
+  halt_bias_init: -2.0
+  act_loss_weight: 0.01
+
+training:
+  max_recursion_steps: 64
+  max_seq_len: 2048
+  batch_size_per_gpu: 4
+  gradient_accumulation_steps: 16
+  num_gpus: 4
+  seed: 42
+
+  # Phase 1: Recover Knowledge
+  phase1_steps: 20000
+  phase1_fixed_depth: 8
+  phase1_lr: 1.0e-4
+  phase1_min_lr: 1.0e-6
+  phase1_warmup_steps: 1000
+
+  # Phase 2: Awaken Controller
+  phase2_steps: 15000
+  phase2_depths: [4, 8, 16, 32]
+  phase2_lr: 5.0e-5
+  phase2_min_lr: 1.0e-6
+  phase2_warmup_steps: 500
+  phase2_distill_alpha: 0.5
+  phase2_distill_temp: 2.0
+  phase2_teacher_model: "Qwen/Qwen2.5-72B-Instruct"
+
+  # Phase 3: Full Ouroboros (extended for overnight training)
+  phase3_steps: 30000
+  phase3_lr: 1.0e-5
+  phase3_min_lr: 1.0e-6
+  phase3_warmup_steps: 500
+  phase3_act_loss_weight: 0.01
+
+  # Optimization
+  weight_decay: 0.1
+  max_grad_norm: 1.0
+  bf16: true
+
+  # Logging
+  log_every: 10
+  eval_every: 500
+  save_every: 2000
+  checkpoint_dir: "checkpoints"
+  wandb_project: "ouroboros"

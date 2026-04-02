@@ -1,0 +1,51 @@
+[project]
+name = "ouroboros"
+version = "0.1.0"
+description = "Ouroboros: Self-Generating Recursive Computation for Efficient Deep Reasoning"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.40",
+    "accelerate>=0.30",
+    "deepspeed>=0.14",
+    "einops>=0.8",
+    "rich>=13.0",
+    "wandb>=0.16",
+    "datasets>=2.18",
+    "pyyaml>=6.0",
+    "safetensors>=0.4",
+    "scipy>=1.11",
+    "sentencepiece>=0.2",
+]
+
+[project.optional-dependencies]
+rl = [
+    "trl>=0.8",
+]
+eval = [
+    "lm-eval>=0.4",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+]
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["ouroboros*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
