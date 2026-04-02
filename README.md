@@ -68,7 +68,7 @@ These gains are measured on the training distribution (FineWeb-edu). On held-out
 ## Installation
 
 ```bash
-git clone https://github.com/rightnowai/ouroboros.git
+git clone https://github.com/RightNow-AI/ouroboros.git
 cd ouroboros
 pip install -e .
 ```
